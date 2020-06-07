@@ -4,6 +4,39 @@ const todoButton=document.querySelector('.todo-Button');
 const todoList=document.querySelector('.todo-List');
 const filterOption=document.querySelector(".filter-todo")
 
+var item_text=document.createElement('DIV');
+item_text.classList.add('item-text');
+
+var editInput=document.createElement('input');
+editInput.classList.add('edit-input');
+editInput.classList.add('hide');
+editInput.name='edit-input';
+editInput.type='text';
+editInput.value-'todo';
+
+
+var edit_input_btn=document.createElement('BUTTON');
+edit_input_btn.textContent="Edit";
+edit_input_btn.classList.add("action-btn");
+
+edit_input_btn.classList.add('edit-btn');
+
+edit_input_btn.classList.add('hide');
+edit_input_btn.type='button';
+
+
+ var action_btn=document.createElement("div");
+ action_btn.classList.add("aciton-btn");
+
+
+
+
+  var edit_btn=document.createElement('button');
+edit_btn.classList.add("action-btn")
+
+edit_btn.classList.add("edit-btn");
+edit_btn.textContent=("edit"); 
+//edit todos
 
 
 
@@ -13,7 +46,19 @@ document.addEventListener("DOMContentLoaded",getTodos)
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click",delteCheck);
 filterOption.addEventListener("click", filterTodo);
-
+edit_btn.addEventListener('click',function(){
+    editInput.classList.remove('hide')
+    item_text.classList.add('hide');
+    edit_input_btn.classList.remove("hide");
+    edit_input_btn.addEventListener('click',function(){
+        item_text.textContent=editInput.value;
+        editInput.classList.add('hide');
+        item_text.classList.remove('hide');
+        edit_input_btn.classList.add('hide');
+    });
+});
+ action_btn.append(edit_input_btn);
+ action_btn.append(edit_btn); 
 
 
 //functions
@@ -45,6 +90,13 @@ const TrashButton = document.createElement('button');
 TrashButton.innerHTML='<i class="fas fa-trash"> </i>';
 TrashButton.classList.add('trash-btn');
 todoDiv.appendChild(TrashButton);
+//append edit button 
+edit_input_btn.innerHTML='<i class ="fas fa-edit"></i>'
+;
+
+todoDiv.appendChild(editInput);
+todoDiv.appendChild(action_btn);
+todoDiv.appendChild(item_text);
 //append to list
 todoList.appendChild(todoDiv);
 // clear the value
@@ -71,6 +123,8 @@ if (item.classList[0]==="complete-btn"){
     todo.classList.toggle("completed");
   } 
 }
+
+
 
 function filterTodo(e){
 
